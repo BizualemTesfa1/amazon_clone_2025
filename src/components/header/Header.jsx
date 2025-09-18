@@ -5,6 +5,7 @@ import { BiCart } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import LowerHeader from "./LowerHeader"
 import styles from "./Header.module.css";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -13,9 +14,9 @@ function Header() {
       <div className={styles.header_container}>
         {/* Logo + Delivery */}
         <div className={styles.logo_container}>
-          <a href="#">
+          <Link to="/">
             <img src={logo} alt="amazon_logo" />
-          </a>
+          </Link>
 
           <div className={styles.delivery}>
             <span>
@@ -39,7 +40,7 @@ function Header() {
 
         {/* Right side links */}
         <div className={styles.order_container}>
-            <a href="" className={styles.language}>
+            <Link to="" className={styles.language}>
           <img
             src="https://upload.wikimedia.org/wikipedia/en/archive/a/a4/20151118161037%21Flag_of_the_United_States.svg"
             alt="US Flag"
@@ -48,26 +49,25 @@ function Header() {
           <select name="" id="">
             <option value="">EN</option>
           </select>
-        </a>
+        </Link>
           {/* Account */}
-          <a href="">
+          <Link to="">
             <div>
               <p>Sign In</p>
               <span>Accounts & Lists</span>
             </div>
-          </a>
+          </Link>
 
           {/* Orders */}
-          <a href="">
+          <Link to="/orders">
             <p>Returns</p>
             <span>& Orders</span>
-          </a>
+          </Link>
 
-          {/* Cart (use href or Link properly) */}
-          <a href="" className={styles.cart}>
+          <Link to="/cart" className={styles.cart}>
             <BiCart size={35} />
             <span>0</span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
