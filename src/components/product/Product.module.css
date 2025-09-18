@@ -71,3 +71,10 @@
     width: 300px !important;
     height: auto;
 }
+
+@media screen and(max-width: 768px) {
+    .product_flexed{
+        display: flex;
+        flex-direction: column;
+    }
+}
