@@ -129,7 +129,7 @@
     color: orange;
 }
 
-.order_container a:hover, .delivery:hover, .logo_container a:hover .lower_container ul li:hover{
+.order_container a:hover, .delivery:hover, .logo_container a:hover, .lower_container ul li:hover{
     border: 1px solid #fff;
     border-radius: 3px;
 }
