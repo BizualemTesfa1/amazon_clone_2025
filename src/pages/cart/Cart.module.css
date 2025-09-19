@@ -7,6 +7,10 @@
 .cartContainer img{
     width: 100px !important;
 }
+.cartContainer div:not(.cartSummary){
+    height: auto !important;
+
+}
 .cartItems {
   padding: 20px;
 }
