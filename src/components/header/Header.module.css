@@ -3,6 +3,11 @@
   padding: 0;
 }
 
+.fixed{
+  position: sticky; 
+  top: 0;
+  z-index: 1;
+}
 .header_container {
   background-color: #1a1a1a;
   display: flex;
@@ -145,3 +150,4 @@
     gap: 2px;
     align-items: center;
 }
+

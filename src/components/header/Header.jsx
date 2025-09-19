@@ -13,7 +13,7 @@ function Header() {
  const [{basket}, dispatch] = useContext(DataContext)
 
   return (
-    <>
+    <section className={styles.fixed}>
     <section>
       <div className={styles.header_container}>
         {/* Logo + Delivery */}
@@ -76,7 +76,7 @@ function Header() {
       </div>
     </section>
     <LowerHeader/>
-    </>
+    </section>
   );
 }
 
