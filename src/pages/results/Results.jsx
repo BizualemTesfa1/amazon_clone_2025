@@ -22,7 +22,7 @@ function Results() {
       console.log(err)
       setIsloading(false)
     })
-  }, [])
+  }, [categoryName])
   return (
     <LayOut>
       <section>
