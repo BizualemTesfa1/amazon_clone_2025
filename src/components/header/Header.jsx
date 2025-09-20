@@ -59,7 +59,7 @@ function Header() {
               </select>
             </Link>
             {/* Account */}
-            <Link to="">
+            <Link to="/auth">
               <div>
                 <p>Sign In</p>
                 <span>Accounts & Lists</span>
