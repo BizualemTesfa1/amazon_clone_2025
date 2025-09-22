@@ -7,10 +7,11 @@ import LowerHeader from "./LowerHeader"
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
 import { DataContext } from "../dataProvider/DataProvider";
+import { auth } from "../../utility/firebase";
 
 function Header() {
 
- const [{basket}, dispatch] = useContext(DataContext)
+ const [{user, basket}, dispatch] = useContext(DataContext)
 
  const totalItem =basket?.reduce((amount,item)=>{
   return item.amount + amount
@@ -43,7 +44,7 @@ function Header() {
               <option value="">All</option>
             </select>
             <input type="text" placeholder="Search product" />
-            <BsSearch size={25} />
+            <BsSearch size={35} />
           </div>
 
           {/* Right side links */}
@@ -59,10 +60,21 @@ function Header() {
               </select>
             </Link>
             {/* Account */}
-            <Link to="/auth">
+            <Link to={!user && "/auth"}>
               <div>
-                <p>Sign In</p>
-                <span>Accounts & Lists</span>
+                {
+                  user?(
+                    <>
+                    <p>Hello {user?.email?.split("@")[0]} </p>
+                    <span onClick={()=>auth.signOut()}>Sign Out</span>
+                    </>
+                  ):(
+                    <>
+                      <p>Hello, Sign In</p>
+                      <span>Accounts & Lists</span>
+                    </>
+                  )
+                }
               </div>
             </Link>
 

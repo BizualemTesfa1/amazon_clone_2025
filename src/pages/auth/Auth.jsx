@@ -1,45 +1,54 @@
 import React, { useState, useContext } from "react";
 import styles from "./Auth.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo_black from "../../assets/images/amazone_logo_black.png";
 import { auth } from "../../utility/firebase";
 import {signInWithEmailAndPassword,createUserWithEmailAndPassword} from "firebase/auth";
+import {ClipLoader} from "react-spinners"
 import {DataContext} from "../../components/dataProvider/DataProvider"
 import { Type } from "../../utility/action.type";
 function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState({signIn:false, signUp:false});
 
 const [{user}, dispatch] = useContext(DataContext)
+const navigate = useNavigate()
 
 console.log(user)
   const authHandler = async (e) => {
     e.preventDefault();
 
-    if (e.target.name === "signin") {
+   if (e.target.name === "signin") {
+      setLoading({...loading, signIn:true})
       signInWithEmailAndPassword(auth, email, password)
         .then((userInfo) => {
           dispatch({
             type: Type.SET_USER,
             user: userInfo.user
           })
+          setLoading({...loading, signIn: false})
+          navigate("/")
         })
         .catch((err) => {
-          console.error(err);
+          setLoading({...loading, signIn: false})
           setError(err.message);
         });
     } else if (e.target.name === "signup") {
+      setLoading({...loading, signUp:true})
       createUserWithEmailAndPassword(auth, email, password)
         .then((userInfo) => {
            dispatch({
              type: Type.SET_USER,
              user: userInfo.user,
            });
+           setLoading({...loading, signUp:false})
+           navigate("/")
         })
         .catch((err) => {
-          console.error(err);
           setError(err.message);
+          setLoading({...loading, signUp:false})
         });
     }
   };
@@ -80,11 +89,9 @@ console.log(user)
             name="signin"
             className={styles.login_signinBtn}
           >
-            Sign In
+            {loading.signIn ? <ClipLoader color="#000" size={15} /> : "Sign In"}
           </button>
         </form>
-
-        {error && <p style={{ color: "red" }}>{error}</p>}
 
         <p>
           By signing in you agree to the AMAZON FAKE CLONE Conditions of use &
@@ -98,8 +105,15 @@ console.log(user)
           name="signup"
           className={styles.login_registerBtn}
         >
-          Create your Amazon Account
+          {loading.signUp ? (
+            <ClipLoader color="#000" size={15} />
+          ) : (
+            "Create your Amazon Account"
+          )}
         </button>
+        {error && (
+          <small style={{ color: "red", paddingTop: "10px" }}> {error} </small>
+        )}
       </div>
     </section>
   );
