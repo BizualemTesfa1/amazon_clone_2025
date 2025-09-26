@@ -10,9 +10,10 @@ import { axiosInstance } from "../../API/axios";
 import { db } from "../../utility/firebase";
 import { doc, setDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { Type } from "../../utility/action.type";
 
 function Payment() {
-  const [{user, basket }] = useContext(DataContext);
+  const [{user, basket }, dispatch] = useContext(DataContext);
   const totalItem = basket?.reduce((amount, item) => {
     return item.amount + amount;
   }, 0);
@@ -69,6 +70,9 @@ const handelPayment = async(e)=>{
       created: paymentIntent.created,
     }
   );
+  // empty basket
+dispatch({type: Type.EMPTY_BASKET})
+
   setProcessing(false)
 
   navigate("/orders", {state: {msg:"you have placed new order"}})
@@ -92,7 +96,7 @@ const handelPayment = async(e)=>{
           <div>
             <div>{user?.email}</div>
             <div>123 test street</div>
-            <div>test, tt</div>
+            <div>test, tm</div>
           </div>
         </div>
         <hr />
