@@ -44,7 +44,7 @@ function Header() {
               <option value="">All</option>
             </select>
             <input type="text" placeholder="Search product" />
-            <BsSearch size={35} />
+            <BsSearch size={38} />
           </div>
 
           {/* Right side links */}
